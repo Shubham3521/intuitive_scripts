@@ -1,0 +1,18 @@
+@echo off
+setlocal enabledelayedexpansion
+set "string=abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+set "result="
+set loopCount=10
+:loop
+for /L %%i in (1,1,10) do call :add
+echo %result%
+set "result="
+set /a loopCount=%loopCount%-1
+if %loopCount%==0 GOTO:EOF
+timeout /t 1
+GOTO :loop
+goto :eof
+:add
+set /a x=%random% %% 62
+set result=%result%!string:~%x%,1!
+goto :eof
